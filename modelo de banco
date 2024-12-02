@@ -1,0 +1,145 @@
+1. Usuários e Perfis
+
+Tabela: usuarios
+
+id_usuario (PK)
+nome
+email
+senha
+telefone
+data_criacao
+tipo_usuario (cliente, motorista, administrador)
+
+Tabela: enderecos
+
+id_endereco (PK)
+id_usuario (FK)
+logradouro
+numero
+complemento
+bairro
+cidade
+estado
+cep
+pais
+
+
+2. Motoristas e Veículos
+
+Tabela: motoristas
+
+id_motorista (PK)
+id_usuario (FK)
+cnh
+status (ativo, inativo, suspenso)
+
+
+Tabela: veiculos
+
+id_veiculo (PK)
+id_motorista (FK)
+modelo
+marca
+placa
+cor
+ano
+capacidade_carga
+
+
+3. Pedidos e Corridas
+
+
+Tabela: pedidos
+
+id_pedido (PK)
+id_cliente (FK)
+id_motorista (FK, pode ser NULL até ser aceito)
+origem_latitude
+origem_longitude
+destino_latitude
+destino_longitude
+distancia_km
+status (pendente, em andamento, concluído, cancelado)
+tipo_pedido (corrida ou entrega)
+data_criacao
+data_finalizacao
+
+
+Tabela: itens_entrega (se for um pedido de entrega)
+
+id_item (PK)
+id_pedido (FK)
+descricao
+peso_kg
+dimensoes (opcional: largura x altura x profundidade)
+
+
+4. Pagamentos
+
+
+Tabela: pagamentos
+
+id_pagamento (PK)
+id_pedido (FK)
+valor_total
+metodo_pagamento (cartão, dinheiro, carteira digital)
+status (pendente, pago, cancelado)
+data_pagamento
+
+
+Tabela: carteiras (opcional, para clientes que usam créditos no app)
+
+id_carteira (PK)
+id_usuario (FK)
+saldo_atual
+5. Tarifação e Frete
+Tabela: tarifas
+
+id_tarifa (PK)
+tipo_tarifa (corrida, entrega)
+custo_base
+custo_por_km
+custo_por_minuto
+Tabela: frete_adicional
+
+id_frete (PK)
+id_pedido (FK)
+valor_adicional (baseado em peso, volume ou distância adicional)
+motivo
+
+
+6. Localização e Rastreamento
+
+Tabela: rastreamento
+
+id_rastreamento (PK)
+id_pedido (FK)
+latitude
+longitude
+data_hora
+
+
+7. Avaliações e Suporte
+
+Tabela: avaliacoes
+
+id_avaliacao (PK)
+id_pedido (FK)
+nota (1 a 5)
+comentario
+data_avaliacao
+
+
+Tabela: suporte
+
+id_ticket (PK)
+id_usuario (FK)
+descricao
+status (aberto, em andamento, resolvido)
+data_criacao
+Esse escopo cobre as principais funcionalidades para:
+
+Corridas (usuários, motoristas, veículos, pedidos).
+Entregas (pedidos, itens, cálculo de frete).
+Pagamentos e Tarifas.
+Rastreamento e Avaliações.
