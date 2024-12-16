@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/api/")
 @RequiredArgsConstructor
 public class UsuarioController {
     private final UsuarioService usuarioService;
@@ -20,7 +20,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.criarUsuario(usuarioDTO));
     }
 
-    @GetMapping
+    @GetMapping("/usuarios")
     public ResponseEntity<List<Usuario>> listarUsuarios() {
         return ResponseEntity.ok(usuarioService.listarUsuarios());
     }
