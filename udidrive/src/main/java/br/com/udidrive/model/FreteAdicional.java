@@ -1,10 +1,9 @@
 package br.com.udidrive.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.math.BigDecimal;
 
 
 @Data
@@ -13,6 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "frete_adicional")
+@Getter
+@Setter
 public class FreteAdicional {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +24,8 @@ public class FreteAdicional {
     @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido pedido;
 
-    @Column(name = "valor_adicional", nullable = false, precision = 10, scale = 2)
-    private Double valorAdicional;
+    @Column(name = "valor_adicional", nullable = false)
+    private BigDecimal valorAdicional;
 
     @Column(name = "motivo", length = 255)
     private String motivo;

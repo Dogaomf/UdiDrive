@@ -24,6 +24,6 @@ public class Carteira {
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @Column(name = "saldo_atual", nullable = false, precision = 10, scale = 2)
+    @Column(name = "saldo_atual", nullable = false)
     private BigDecimal saldoAtual = BigDecimal.ZERO;
 }

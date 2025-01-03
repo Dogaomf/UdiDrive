@@ -1,11 +1,9 @@
 package br.com.udidrive.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -14,6 +12,8 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "pedidos")
+@Getter
+@Setter
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,20 +28,20 @@ public class Pedido {
     @JoinColumn(name = "id_motorista")
     private Motorista motorista;
 
-    @Column(name = "origem_latitude", precision = 10, scale = 7, nullable = false)
-    private Double origemLatitude;
+    @Column(name = "origem_latitude", nullable = false)
+    private BigDecimal origemLatitude;
 
-    @Column(name = "origem_longitude", precision = 10, scale = 7, nullable = false)
-    private Double origemLongitude;
+    @Column(name = "origem_longitude", nullable = false)
+    private BigDecimal origemLongitude;
 
-    @Column(name = "destino_latitude", precision = 10, scale = 7, nullable = false)
-    private Double destinoLatitude;
+    @Column(name = "destino_latitude", nullable = false)
+    private BigDecimal destinoLatitude;
 
-    @Column(name = "destino_longitude", precision = 10, scale = 7, nullable = false)
-    private Double destinoLongitude;
+    @Column(name = "destino_longitude", nullable = false)
+    private BigDecimal destinoLongitude;
 
-    @Column(name = "distancia_km", precision = 10, scale = 2)
-    private Double distanciaKm;
+    @Column(name = "distancia_km")
+    private BigDecimal distanciaKm;
 
     @Column(nullable = false, length = 15)
     private String status;

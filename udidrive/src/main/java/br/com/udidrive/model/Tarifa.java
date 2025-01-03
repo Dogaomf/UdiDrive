@@ -1,10 +1,9 @@
 package br.com.udidrive.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -12,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "tarifas")
+@Getter
+@Setter
 public class Tarifa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +22,12 @@ public class Tarifa {
     @Column(name = "tipo_tarifa", nullable = false, length = 15)
     private String tipoTarifa;
 
-    @Column(name = "custo_base", nullable = false, precision = 10, scale = 2)
-    private Double custoBase;
+    @Column(name = "custo_base", nullable = false)
+    private BigDecimal custoBase;
 
-    @Column(name = "custo_por_km", precision = 10, scale = 2)
-    private Double custoPorKm;
+    @Column(name = "custo_por_km")
+    private BigDecimal custoPorKm;
 
-    @Column(name = "custo_por_minuto", precision = 10, scale = 2)
-    private Double custoPorMinuto;
+    @Column(name = "custo_por_minuto")
+    private BigDecimal custoPorMinuto;
 }

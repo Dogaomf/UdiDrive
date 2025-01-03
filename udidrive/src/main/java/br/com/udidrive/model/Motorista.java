@@ -1,10 +1,9 @@
 package br.com.udidrive.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -12,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "motoristas")
+@Getter
+@Setter
 public class Motorista {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +29,6 @@ public class Motorista {
     @Column(nullable = false, length = 15)
     private String status;
 
-    @Column(name = "avaliacao_media", precision = 3, scale = 2)
-    private Double avaliacaoMedia;
+    @Column(name = "avaliacao_media")
+    private BigDecimal avaliacaoMedia;
 }

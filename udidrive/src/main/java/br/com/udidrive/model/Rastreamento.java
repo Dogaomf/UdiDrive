@@ -1,11 +1,9 @@
 package br.com.udidrive.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -14,6 +12,8 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "rastreamento")
+@Getter
+@Setter
 public class Rastreamento {
 
     @Id
@@ -25,11 +25,11 @@ public class Rastreamento {
     @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido pedido;
 
-    @Column(nullable = false, precision = 10, scale = 7)
-    private Double latitude;
+    @Column(nullable = false)
+    private BigDecimal latitude;
 
-    @Column(nullable = false, precision = 10, scale = 7)
-    private Double longitude;
+    @Column(nullable = false)
+    private BigDecimal longitude;
 
     @Column(name = "data_hora", nullable = false)
     private LocalDateTime dataHora;

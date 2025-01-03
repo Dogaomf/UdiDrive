@@ -1,11 +1,9 @@
 package br.com.udidrive.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -14,6 +12,8 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "pagamentos")
+@Getter
+@Setter
 public class Pagamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +24,8 @@ public class Pagamento {
     @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido pedido;
 
-    @Column(name = "valor_total", nullable = false, precision = 10, scale = 2)
-    private Double valorTotal;
+    @Column(name = "valor_total", nullable = false)
+    private BigDecimal valorTotal;
 
     @Column(name = "metodo_pagamento", nullable = false, length = 20)
     private String metodoPagamento;

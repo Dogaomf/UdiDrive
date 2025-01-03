@@ -28,6 +28,6 @@ public class Cliente {
     @Column(name = "data_nascimento")
     private java.time.LocalDate dataNascimento;
 
-    @Column(name = "avaliacao_media", precision = 3, scale = 2)
+    @Column(name = "avaliacao_media")
     private Double avaliacaoMedia;
 }
