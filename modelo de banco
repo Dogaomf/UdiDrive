@@ -143,3 +143,39 @@ Corridas (usuários, motoristas, veículos, pedidos).
 Entregas (pedidos, itens, cálculo de frete).
 Pagamentos e Tarifas.
 Rastreamento e Avaliações.
+
+CREATE TABLE IF NOT EXISTS public.clientes
+(
+    id_cliente integer NOT NULL DEFAULT nextval('clientes_id_cliente_seq'::regclass),
+    id_usuario integer NOT NULL,
+    cpf character varying(14) COLLATE pg_catalog."default" NOT NULL,
+    data_nascimento date,
+    avaliacao_media numeric(3,2) DEFAULT 0.0,
+    CONSTRAINT clientes_pkey PRIMARY KEY (id_cliente),
+    CONSTRAINT clientes_cpf_key UNIQUE (cpf),
+    CONSTRAINT clientes_id_usuario_fkey FOREIGN KEY (id_usuario)
+        REFERENCES public.usuarios (id_usuario) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);
+
+CREATE TABLE public.entidade_tipos (
+    id_tipo SERIAL PRIMARY KEY,       -- ID único para cada tipo de entidade
+    descricao VARCHAR(50) NOT NULL   -- Descrição (cliente, motorista, veículo)
+);
+
+
+INSERT INTO public.entidade_tipos (descricao) VALUES
+('cliente'),
+('motorista'),
+('veiculo');
+
+CREATE TABLE public.fotos (
+    id_foto SERIAL PRIMARY KEY,          -- ID único da foto
+    entidade_tipo INTEGER NOT NULL,      -- Referência ao tipo de entidade
+    entidade_id INTEGER NOT NULL,        -- ID da entidade (cliente, motorista, veículo)
+    foto BYTEA NOT NULL,                 -- Foto em formato binário
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_entidade_tipo FOREIGN KEY (entidade_tipo)
+        REFERENCES public.entidade_tipos (id_tipo) ON DELETE CASCADE
+);
