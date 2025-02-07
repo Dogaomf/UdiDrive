@@ -23,14 +23,20 @@ public class FotoController {
         return fotoService.salvar(fotoVO);
     }
 
+    @PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+    public FotoVO update( @RequestBody FotoVO fotoVO) {
+        return fotoService.atualizarFoto(fotoVO);
+    }
+
     @GetMapping(value = "/{entidadeTipo}/{entidadeId}",
                     produces = (MediaType.APPLICATION_JSON_VALUE))
-    public List<FotoVO> buscarPorEntidade(@PathVariable(value = "entidadeTipo") Long entidadeTipo, @PathVariable(value = "entidadeId") Long entidadeId) {
+    public FotoVO buscarPorEntidade(@PathVariable(value = "entidadeTipo") Long entidadeTipo, @PathVariable(value = "entidadeId") Long entidadeId) {
         return fotoService.buscarPorEntidade(entidadeTipo, entidadeId);
     }
 
     @DeleteMapping("/{idFoto}")
-    public ResponseEntity<Void> excluirFoto(@PathVariable(value = "idFoto") Long idFoto) {
+    public ResponseEntity<?> excluirFoto(@PathVariable(value = "idFoto") Long idFoto) {
         fotoService.excluirPorId(idFoto);
         return ResponseEntity.noContent().build();
     }
