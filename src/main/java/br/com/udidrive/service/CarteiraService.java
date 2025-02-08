@@ -24,7 +24,7 @@ public class CarteiraService {
 
     public CarteiraVO findByUsuarioId(Long id) {
         logger.info("Buscar a carteira de um usuario");
-        var entity = repository.findByUsuarioId(id).orElseThrow(() -> new ResourceNotFoundException("No Records found for this ID!"));
+        var entity = repository.findByUsuarioIdUsuario(id).orElseThrow(() -> new ResourceNotFoundException("No Records found for this ID!"));
         var vo =  Mapper.parseObject(entity, CarteiraVO.class);
         //vo.add(linkTo(methodOn(PersonController.class).findById(idPerson)).withSelfRel());
         return vo;
@@ -46,7 +46,7 @@ public class CarteiraService {
             throw new ResourceObjectIsNullException();
         }
         logger.info("Atualizar carteira de um usuario");
-        var entity = repository.findByUsuarioId(carteiraVO.getIdUsuario()).orElseThrow(() -> new ResourceNotFoundException("No Records found for this ID!"));
+        var entity = repository.findByUsuarioIdUsuario(carteiraVO.getUsuarioId()).orElseThrow(() -> new ResourceNotFoundException("No Records found for this ID!"));
 
         entity.setSaldoAtual(carteiraVO.getSaldoAtual());
 

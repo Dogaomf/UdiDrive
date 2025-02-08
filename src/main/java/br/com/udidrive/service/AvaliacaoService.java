@@ -22,10 +22,13 @@ public class AvaliacaoService {
     @Autowired
     private AvaliacaoRepository repository;
 
-    public AvaliacaoVO buscarPorEntidadeId(Long entidadeTipo, Long entidadeId) {
+    public AvaliacaoVO buscarEntidadeId(Long entidadeTipo, Long entidadeId) {
         logger.info("Buscar avaliação por tipo de entidade e pelo id da entidade solicitada");
-        var entity =  repository.findByEntidadeTipoIdTipoAndEntidadeId(entidadeTipo, entidadeId).orElseThrow(() -> new ResourceNotFoundException("Não encontrado para o ID!"));
-        var avaliacao = Mapper.parseObject(repository.findByEntidadeTipoIdTipoAndEntidadeId(entidadeTipo,entidadeId), AvaliacaoVO.class);
+
+        var entity = repository.findByEntidadeTipoAndEntidadeId(entidadeTipo, entidadeId).orElse(null);
+        // var entity =  repository.findByEntidadeTipoIdTipoAndEntidadeId(entidadeTipo, entidadeId).orElseThrow(() -> new ResourceNotFoundException("Não encontrado para o ID!"));
+
+        //var avaliacao = Mapper.parseObject(repository.findByEntidadeTipoIdTipoAndEntidadeId(entidadeTipo,entidadeId), AvaliacaoVO.class);
 
         if (entity == null){
             logger.warning("Nenhuma avaliação encontrada para o tipo de entidade "
@@ -40,7 +43,7 @@ public class AvaliacaoService {
             return avaliacaoZerada;
         }
         //vo.add(linkTo(methodOn(PersonController.class).findById(idPerson)).withSelfRel());
-        return avaliacao;
+        return Mapper.parseObject(entity, AvaliacaoVO.class);
     }
 
     public AvaliacaoVO salvar(AvaliacaoVO avaliacaoVO) {

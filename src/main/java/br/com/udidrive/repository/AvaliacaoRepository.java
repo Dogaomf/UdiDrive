@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long> {
 
     // Consultar fotos por tipo de entidade e ID da entidade
-    Optional<Avaliacao> findByEntidadeTipoIdTipoAndEntidadeId(Long idTipo, Long entidadeId);
+    Optional<Avaliacao> findByEntidadeTipoAndEntidadeId(Long idTipo, Long entidadeId);
 }

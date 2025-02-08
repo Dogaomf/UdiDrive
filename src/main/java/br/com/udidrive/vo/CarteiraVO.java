@@ -7,6 +7,6 @@ import java.math.BigDecimal;
 @Data
 public class CarteiraVO {
     private Long idCarteira;
-    private Long idUsuario;
+    private Long usuarioId;
     private BigDecimal saldoAtual;
 }

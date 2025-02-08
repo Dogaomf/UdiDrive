@@ -17,8 +17,14 @@ public class Mapper {
         mapper.createTypeMap(Avaliacao.class, AvaliacaoVO.class).addMapping(Avaliacao::getIdAvaliacao, AvaliacaoVO::setIdAvaliacao);
         mapper.createTypeMap(AvaliacaoVO.class, Avaliacao.class).addMapping(AvaliacaoVO::getIdAvaliacao, Avaliacao::setIdAvaliacao);
 
-        mapper.createTypeMap(Carteira.class, CarteiraVO.class).addMapping(Carteira::getIdCarteira, CarteiraVO::setIdCarteira);
-        mapper.createTypeMap(CarteiraVO.class, Carteira.class).addMapping(CarteiraVO::getIdCarteira, Carteira::setIdCarteira);
+        mapper.createTypeMap(Carteira.class, CarteiraVO.class).addMappings(mapper -> {
+            mapper.map(Carteira::getIdCarteira, CarteiraVO::setIdCarteira);
+            mapper.map(src -> src.getUsuario().getIdUsuario(), CarteiraVO::setUsuarioId);
+        });
+
+        mapper.createTypeMap(CarteiraVO.class, Carteira.class).addMappings(mapper -> {
+            mapper.map(CarteiraVO::getIdCarteira, Carteira::setIdCarteira);
+        });
 
         mapper.createTypeMap(Cliente.class, ClienteVO.class).addMapping(Cliente::getIdCliente, ClienteVO::setIdCliente);
         mapper.createTypeMap(ClienteVO.class, Cliente.class).addMapping(ClienteVO::getIdCliente, Cliente::setIdCliente);

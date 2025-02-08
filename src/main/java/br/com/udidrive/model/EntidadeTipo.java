@@ -10,8 +10,9 @@ public class EntidadeTipo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idTipo;
+    @Column(name = "id_tipo")
+    private Long idTipo;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "descricao", nullable = false, length = 50)
     private String descricao;
 }
